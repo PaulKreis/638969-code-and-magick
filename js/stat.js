@@ -72,13 +72,12 @@ window.renderStatistics = function (ctx, names, times) {
 
   //  Отрисовка столбиков и текста
   for (var i = 0; i < names.length; i++) {
-    var columnX = CLOUD_X + leftColumnsGap + (BAR_WIDTH + COLUMN_GAP) * i;
     var barHeight = (BAR_HEIGHT * times[i]) / maxTime;
+    var columnX = CLOUD_X + leftColumnsGap + (BAR_WIDTH + COLUMN_GAP) * i;
     var columnY = CLOUD_HEIGHT - barHeight - NAMES_FONT_GAP;
- 
+
     renderText(ctx, columnX, CLOUD_Y + CLOUD_HEIGHT - NAMES_FONT_GAP, names[i], FONT_FILL_STYLE);
     renderText(ctx, columnX, CLOUD_HEIGHT - barHeight - TIME_FONT_GAP, Math.round(times[i]), FONT_FILL_STYLE);
-
     var columnColor = getRandomBlueColor();
 
     if (names[i] === PLAYER_NAME) {
