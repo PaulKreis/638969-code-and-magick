@@ -5,7 +5,6 @@ var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var COLUMN_GAP = 50;
-var COLUMN_Y = 250;
 var NAMES_FONT_GAP = 20;
 var TIME_FONT_GAP = 40;
 var BAR_HEIGHT = 150;
@@ -74,17 +73,18 @@ window.renderStatistics = function (ctx, names, times) {
   //  Отрисовка столбиков и текста
   for (var i = 0; i < names.length; i++) {
     var columnX = CLOUD_X + leftColumnsGap + (BAR_WIDTH + COLUMN_GAP) * i;
-
+    var barHeight = (BAR_HEIGHT * times[i]) / maxTime;
+    var columnY = CLOUD_HEIGHT - barHeight - NAMES_FONT_GAP;
+ 
     renderText(ctx, columnX, CLOUD_Y + CLOUD_HEIGHT - NAMES_FONT_GAP, names[i], FONT_FILL_STYLE);
-    renderText(ctx, columnX, CLOUD_HEIGHT - ((BAR_HEIGHT * times[i]) / maxTime) - TIME_FONT_GAP, Math.round(times[i]), FONT_FILL_STYLE);
+    renderText(ctx, columnX, CLOUD_HEIGHT - barHeight - TIME_FONT_GAP, Math.round(times[i]), FONT_FILL_STYLE);
 
-    var barHeight = -1 * (BAR_HEIGHT * times[i]) / maxTime;
     var columnColor = getRandomBlueColor();
 
     if (names[i] === PLAYER_NAME) {
       columnColor = PLAYER_COLUMN_COLOR;
     }
 
-    renderColumn(ctx, columnX, COLUMN_Y, BAR_WIDTH, barHeight, columnColor);
+    renderColumn(ctx, columnX, columnY, BAR_WIDTH, barHeight, columnColor);
   }
 };
