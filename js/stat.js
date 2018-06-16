@@ -78,8 +78,8 @@ window.renderStatistics = function (ctx, names, times) {
 
     renderText(ctx, columnX, CLOUD_Y + CLOUD_HEIGHT - NAMES_FONT_GAP, names[i], FONT_FILL_STYLE);
     renderText(ctx, columnX, CLOUD_HEIGHT - barHeight - TIME_FONT_GAP, Math.round(times[i]), FONT_FILL_STYLE);
-    var columnColor = getRandomBlueColor();
 
+    var columnColor = getRandomBlueColor();
     if (names[i] === PLAYER_NAME) {
       columnColor = PLAYER_COLUMN_COLOR;
     }
