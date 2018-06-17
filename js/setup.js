@@ -68,7 +68,8 @@ var renderWizard = function (wizard) {
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
   similarListElement.appendChild(wizardElement);
-}
+};
+
 var generateWizards = function (wizardsNumber) {
   for (var i = 0; i < wizardsNumber; i++) {
     var wizardObject = generateCharacter();
@@ -76,7 +77,7 @@ var generateWizards = function (wizardsNumber) {
   }
 };
 
-var initSetup = function (){
+var initSetup = function () {
   var userDialog = document.querySelector('.setup');
   userDialog.classList.remove('hidden');
   document.querySelector('.setup-similar').classList.remove('hidden');
