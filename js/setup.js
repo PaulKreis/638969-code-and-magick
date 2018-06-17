@@ -58,8 +58,10 @@ var generateCharacter = function () {
   return fullName;
 };
 
+var wizardFragment = document.createDocumentFragment();
+var similarListElement = document.querySelector('.setup-similar-list');
+
 var renderWizard = function (wizard) {
-  var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
@@ -67,7 +69,7 @@ var renderWizard = function (wizard) {
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.fullName;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
-  similarListElement.appendChild(wizardElement);
+  wizardFragment.appendChild(wizardElement);
 };
 
 var generateWizards = function (wizardsNumber) {
@@ -78,10 +80,11 @@ var generateWizards = function (wizardsNumber) {
 };
 
 var initSetup = function () {
+  generateWizards(WIZARDS_NUMBER);
   var userDialog = document.querySelector('.setup');
   userDialog.classList.remove('hidden');
   document.querySelector('.setup-similar').classList.remove('hidden');
-  generateWizards(WIZARDS_NUMBER);
+  similarListElement.appendChild(wizardFragment);
 };
 
 initSetup();
