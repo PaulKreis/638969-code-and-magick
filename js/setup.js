@@ -41,6 +41,14 @@ var EYES_COLORS = [
   'green'
 ];
 
+var FIREBALL_COLORS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+
 var getRandomData = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
@@ -89,3 +97,87 @@ var initSetup = function () {
 };
 
 initSetup();
+
+//  #14 Учебный проект: одеть Надежду
+
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+var wizardName = setup.querySelector('.setup-user-name');
+
+//  Открытие/закрытие окна настройки персонажа
+wizardName.addEventListener('focus', function () {
+  document.removeEventListener('keydown', onPopupEscPress);
+});
+
+wizardName.addEventListener('focusout', function () {
+  document.addEventListener('keydown', onPopupEscPress);
+});
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+
+//  Изменение цвета мантии персонажа по нажатию
+var wizardCoat = setup.querySelector('.wizard-coat');
+var wizardCoatInput = setup.querySelector('input[name="coat-color"');
+wizardCoat.addEventListener('click', function () {
+  var newCoatColor = getRandomData(COAT_COLORS);
+  wizardCoat.style.fill = newCoatColor;
+  wizardCoatInput.value = newCoatColor;
+});
+
+//  Изменение цвета глаз персонажа по нажатию
+var wizardEyes = setup.querySelector('.wizard-eyes');
+var wizardEyesInput = setup.querySelector('input[name="eyes-color"');
+wizardEyes.addEventListener('click', function () {
+  var newEyesColor = getRandomData(EYES_COLORS);
+  wizardEyes.style.fill = newEyesColor;
+  wizardEyesInput.value = newEyesColor;
+});
+
+//  Изменение цвета фаерболов по нажатию
+var wizardFireball = setup.querySelector('.setup-fireball-wrap');
+var wizardFireballInput = setup.querySelector('input[name="fireball-color"');
+wizardFireball.addEventListener('click', function () {
+  var newFireballColor = getRandomData(FIREBALL_COLORS);
+  wizardFireball.style.background = newFireballColor;
+  wizardFireballInput.value = newFireballColor;
+});
+
+closePopup();
